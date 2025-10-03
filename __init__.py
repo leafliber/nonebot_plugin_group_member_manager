@@ -248,7 +248,7 @@ async def handle_check_inactive(bot: Bot, event: GroupMessageEvent):
             
             message = f"不活跃成员列表 ({batch_num}/{total_batches}):\n"
             message += f"不活跃判定: {inactive_months}个月\n"
-            message += "=" * 30 + "\n"
+            message += "=" * 20 + "\n"
             
             for member in batch:
                 days_ago = (datetime.now() - member["last_sent_time"]).days

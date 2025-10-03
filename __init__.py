@@ -237,17 +237,19 @@ async def handle_check_inactive(bot: Bot, event: GroupMessageEvent):
         
         # 按最后发言时间排序
         inactive_members.sort(key=lambda x: x["last_sent_time"])
-        
-        # 分批发送，每批10人
-        batch_size = 10
+
+        # 分批发送，每批5人
+        batch_size = 5
         total_batches = (len(inactive_members) + batch_size - 1) // batch_size
         
         for i in range(0, len(inactive_members), batch_size):
             batch = inactive_members[i:i + batch_size]
             batch_num = i // batch_size + 1
             
-            message = f"不活跃成员列表 ({batch_num}/{total_batches}):\n"
-            message += f"不活跃判定: {inactive_months}个月\n"
+            message = ""
+            if i == 0: 
+                message += f"不活跃判定: {inactive_months}个月\n"
+            message += f"不活跃成员列表 ({batch_num}/{total_batches}):\n"
             message += "=" * 20 + "\n"
             
             for member in batch:
